@@ -1,368 +1,418 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Upload File - Hamro School</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f0f4f8;
-      text-align: center;
-      padding: 30px;
-    }
-    .container {
-      width: 50%;
-      background: #ffffff;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-      margin: auto;
-    }
-    h2 {
-      color: #2c3e50;
-      font-size: 24px;
-    }
-    form {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    label {
-      font-weight: bold;
-      margin-top: 15px;
-      color: #34495e;
-    }
-    select, input[type="file"] {
-      width: 80%;
-      padding: 10px;
-      margin-top: 5px;
-      border: 1px solid #bdc3c7;
-      border-radius: 5px;
-      outline: none;
-      font-size: 14px;
-    }
-    input[type="submit"] {
-      margin-top: 20px;
-      padding: 12px 20px;
-      border: none;
-      background: #3498db;
-      color: white;
-      font-size: 16px;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-    input[type="submit"]:hover {
-      background: #2980b9;
-    }
-    /* Hide sections by default */
-    #secondary_fields, 
-    #ctevt_fields, 
-    #neb_fields, 
-    #neb_year_fields,
-    #university_fields {
-      width: 80%;
-      display: none;
-    }
-  </style>
-  <script>
-    function toggleFields() {
-      var category = document.getElementById('category').value;
-      // Show primary sections based on category
-      document.getElementById('secondary_fields').style.display = (category === 'Secondary') ? 'block' : 'none';
-      document.getElementById('ctevt_fields').style.display = (category === 'CTEVT') ? 'block' : 'none';
-      document.getElementById('neb_fields').style.display = (category === 'NEB') ? 'block' : 'none';
-      document.getElementById('neb_year_fields').style.display = (category === 'NEB') ? 'block' : 'none';
-      document.getElementById('university_fields').style.display = (category === 'University') ? 'block' : 'none';
-      
-      // Hide CTEVT faculty-specific fields
-      document.getElementById('medical_faculty_fields').style.display = 'none';
-      document.getElementById('engineering_faculty_fields').style.display = 'none';
-      document.getElementById('other_faculty_fields').style.display = 'none';
-      document.getElementById('medical_year_fields').style.display = 'none';
-      document.getElementById('semester_fields').style.display = 'none';
-    }
-    
-    function toggleCTEVTFacultyFields() {
-      var cat = document.getElementById('faculty_category').value;
-      document.getElementById('medical_faculty_fields').style.display = 'none';
-      document.getElementById('engineering_faculty_fields').style.display = 'none';
-      document.getElementById('other_faculty_fields').style.display = 'none';
-      document.getElementById('medical_year_fields').style.display = 'none';
-      document.getElementById('semester_fields').style.display = 'none';
-      
-      if (cat === 'Medical') {
-        document.getElementById('medical_faculty_fields').style.display = 'block';
-        document.getElementById('medical_year_fields').style.display = 'block';
-      } else if (cat === 'Engineering') {
-        document.getElementById('engineering_faculty_fields').style.display = 'block';
-        document.getElementById('semester_fields').style.display = 'block';
-      } else if (cat === 'Other') {
-        document.getElementById('other_faculty_fields').style.display = 'block';
-        document.getElementById('semester_fields').style.display = 'block';
-      }
-    }
-    
-    function toggleUniversityFacultyFields() {
-      var uCat = document.getElementById('university_faculty_category').value;
-      // Hide all university faculty fields initially
-      document.getElementById('university_medical_faculty_fields').style.display = 'none';
-      document.getElementById('university_engineering_faculty_fields').style.display = 'none';
-      document.getElementById('university_other_faculty_fields').style.display = 'none';
-      document.getElementById('university_medical_year_fields').style.display = 'none';
-      document.getElementById('university_semester_fields').style.display = 'none';
-      
-      if (uCat === 'Medical') {
-        document.getElementById('university_medical_faculty_fields').style.display = 'block';
-        document.getElementById('university_medical_year_fields').style.display = 'block';
-      } else if (uCat === 'Engineering') {
-        document.getElementById('university_engineering_faculty_fields').style.display = 'block';
-        document.getElementById('university_semester_fields').style.display = 'block';
-      } else if (uCat === 'Other') {
-        document.getElementById('university_other_faculty_fields').style.display = 'block';
-        document.getElementById('university_semester_fields').style.display = 'block';
-      }
-    }
-  </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload File - Hamro School</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f8;
+            text-align: center;
+            padding: 30px;
+        }
+        .container {
+            width: 50%;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            margin: auto;
+        }
+        h2 {
+            color: #2c3e50;
+            font-size: 24px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        label {
+            font-weight: bold;
+            margin-top: 15px;
+            color: #34495e;
+        }
+        select, input[type="file"] {
+            width: 80%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #bdc3c7;
+            border-radius: 5px;
+            outline: none;
+            font-size: 14px;
+        }
+        input[type="submit"] {
+            margin-top: 20px;
+            padding: 12px 20px;
+            border: none;
+            background: #3498db;
+            color: white;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        input[type="submit"]:hover {
+            background: #2980b9;
+        }
+        .hidden { 
+            display: none; 
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <h2>Upload Your Study Materials</h2>
-    <form action="upload.php" method="post" enctype="multipart/form-data">
-      <!-- Category Selection -->
-      <label for="category">Category:</label>
-      <select name="category" id="category" onchange="toggleFields()">
-        <option value="Secondary">Secondary (Grades 1-10)</option>
-        <option value="CTEVT">CTEVT (Faculties)</option>
-        <option value="NEB">NEB</option>
-        <option value="University">University</option>
-      </select>
+    <div class="container">
+        <h2>Upload Your Study Materials</h2>
+        <form action="./backend/upload.php" method="post" enctype="multipart/form-data" id="myForm">
+            <!-- Category Selection -->
+            <label for="category">Category:</label>
+            <select name="category" id="category">
+                <option value="" selected disabled >Select Category</option>
+                <option value="Secondary">Secondary (Grades 1-10)</option>
+                <option value="CTEVT">CTEVT (Faculties)</option>
+                <option value="NEB">NEB</option>
+                <option value="University">University</option>
+            </select>
 
-      <!-- Secondary School Fields -->
-      <div id="secondary_fields">
-        <label for="grade">Select Grade:</label>
-        <select name="grade" id="grade">
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-          <option value="7">7</option>
-          <option value="8">8</option>
-          <option value="9">9</option>
-          <option value="10">10</option>
-        </select>
-      </div>
+            <!-- Secondary Fields -->
+            <select name="grade" id="grade" class="hidden" disabled>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+            </select>
 
-      <!-- CTEVT Fields -->
-      <div id="ctevt_fields">
-        <label for="faculty_category">Select Faculty Category:</label>
-        <select name="faculty_category" id="faculty_category" onchange="toggleCTEVTFacultyFields()">
-          <option value="Medical">Medical</option>
-          <option value="Engineering">Engineering</option>
-          <option value="Other">Other</option>
-        </select>
-        <!-- Medical Faculty Options -->
-        <div id="medical_faculty_fields" style="display: none;">
-          <label for="medical_faculty_name">Select Medical Faculty:</label>
-          <select name="medical_faculty_name" id="medical_faculty_name">
-            <option value="H.A">Health Assistant (H.A)</option>
-            <option value="Nursing">Nursing</option>
-            <option value="Medical Lab">Medical Lab</option>
-            <option value="Dental Science">Dental Science</option>
-            <option value="O.A (Ophthalmic Science)">O.A (Ophthalmic Science)</option>
-            <option value="Radiography">Radiography</option>
-            <option value="Pharmacy">Pharmacy</option>
-            <option value="General Ayurved">General Ayurved</option>
-            <option value="Physiotherapy">Physiotherapy</option>
-            <option value="Midwife">Midwife</option>
-            <option value="Yoga">Yoga</option>
-          </select>
-        </div>
-        <!-- Engineering Faculty Options -->
-        <div id="engineering_faculty_fields" style="display: none;">
-          <label for="engineering_faculty_name">Select Engineering Faculty:</label>
-          <select name="engineering_faculty_name" id="engineering_faculty_name">
-            <option value="Civil Engineering">Civil Engineering</option>
-            <option value="Geomatics Engineering">Geomatics Engineering</option>
-            <option value="Computer Engineering">Computer Engineering</option>
-            <option value="IT Engineering">IT Engineering</option>
-            <option value="Electrical Engineering">Electrical Engineering</option>
-            <option value="Electronic Engineering">Electronic Engineering</option>
-            <option value="Electrical & Electronic Engineering">Electrical & Electronic Engineering</option>
-            <option value="Architectural Engineering">Architectural Engineering</option>
-            <option value="Mechanical Engineering">Mechanical Engineering</option>
-            <option value="Mechatronics Engineering">Mechatronics Engineering</option>
-            <option value="Automobile Engineering">Automobile Engineering</option>
-            <option value="Refrigeration & AC Engineering">Refrigeration & AC Engineering</option>
-            <option value="Biomedical Engineering">Biomedical Engineering</option>
-            <option value="Hydropower Engineering">Hydropower Engineering</option>
-          </select>
-        </div>
-        <!-- Other Faculty Options -->
-        <div id="other_faculty_fields" style="display: none;">
-          <label for="other_faculty_name">Select Other Faculty:</label>
-          <select name="other_faculty_name" id="other_faculty_name">
-            <option value="Agriculture Engineering">Agriculture Engineering</option>
-            <option value="Animal Science">Animal Science</option>
-            <option value="Hotel Management">Hotel Management</option>
-            <option value="Tourism">Tourism</option>
-            <option value="Agro Engineering">Agro Engineering</option>
-          </select>
-        </div>
-        <!-- Year selection for Medical Faculty (CTEVT) -->
-        <div id="medical_year_fields" style="display: none;">
-          <label for="medical_year">Select Year:</label>
-          <select name="medical_year" id="medical_year">
-            <option value="1">Year 1</option>
-            <option value="2">Year 2</option>
-            <option value="3">Year 3</option>
-          </select>
-        </div>
-        <!-- Semester selection for Engineering/Other Faculties (CTEVT) -->
-        <div id="semester_fields" style="display: none;">
-          <label for="semester">Select Semester:</label>
-          <select name="semester" id="semester">
-            <option value="1">Semester 1</option>
-            <option value="2">Semester 2</option>
-            <option value="3">Semester 3</option>
-            <option value="4">Semester 4</option>
-            <option value="5">Semester 5</option>
-            <option value="6">Semester 6</option>
-          </select>
-        </div>
-      </div>
+            <!-- NEB Fields -->
+            <select name="neb_faculty" id="neb_faculty" class="hidden" disabled>
+                <option value="Science (Biology)">Science (Biology)</option>
+                <option value="Science (Computer)">Science (Computer)</option>
+                <option value="Management">Management</option>
+                <option value="Law">Law</option>
+            </select>
+            <select name="neb_year" id="neb_year" class="hidden" disabled>
+                <option value="2">Year 2</option>
+            </select>
 
-      <!-- NEB Fields -->
-      <div id="neb_fields" style="display: none;">
-        <label for="neb_faculty">Select NEB Faculty:</label>
-        <select name="neb_faculty" id="neb_faculty">
-          <option value="Science (Biology)">Science (Biology)</option>
-          <option value="Science (Computer)">Science (Computer)</option>
-          <option value="Management">Management</option>
-          <option value="Law">Law</option>
-        </select>
-      </div>
-      <!-- NEB Year Fields (NEB only has Year 2) -->
-      <div id="neb_year_fields" style="display: none;">
-        <label for="neb_year">Select NEB Year:</label>
-        <select name="neb_year" id="neb_year">
-          <option value="2">Year 2</option>
-        </select>
-      </div>
+            <!-- CTEVT Fields -->
+            <select name="faculty_category" id="faculty_category" class="hidden" disabled>
+                <option value="Medical">Medical</option>
+                <option value="Engineering">Engineering</option>
+                <option value="Other">Other</option>
+            </select>
 
-      <!-- University Fields -->
-      <div id="university_fields" style="display: none;">
-        <label for="university_faculty_category">Select University Faculty Category:</label>
-        <select name="university_faculty_category" id="university_faculty_category" onchange="toggleUniversityFacultyFields()">
-          <option value="Medical">Medical</option>
-          <option value="Engineering">Engineering</option>
-          <option value="Other">Other</option>
-        </select>
-        <!-- University Medical Faculty Options -->
-        <div id="university_medical_faculty_fields" style="display: none;">
-          <label for="university_medical_faculty_name">Select University Medical Faculty:</label>
-          <select name="university_medical_faculty_name" id="university_medical_faculty_name">
-            <option value="Bachelor of Medicine, Bachelor of Surgery (MBBS)">Bachelor of Medicine, Bachelor of Surgery (MBBS)</option>
-            <option value="Bachelor of Dental Surgery (BDS)">Bachelor of Dental Surgery (BDS)</option>
-            <option value="Bachelor of Pharmacy (BPharm)">Bachelor of Pharmacy (BPharm)</option>
-            <option value="Bachelor of Nursing (BN)">Bachelor of Nursing (BN)</option>
-            <option value="Bachelor of Physiotherapy (BPT)">Bachelor of Physiotherapy (BPT)</option>
-            <option value="Bachelor of Medical Imaging (B.MI)">Bachelor of Medical Imaging (B.MI)</option>
-            <option value="Bachelor of Optometry">Bachelor of Optometry</option>
-            <option value="Bachelor of Public Health (BPH)">Bachelor of Public Health (BPH)</option>
-            <option value="Bachelor of Medical Laboratory Technology (BMLT)">Bachelor of Medical Laboratory Technology (BMLT)</option>
-            <option value="Bachelor of Ayurvedic Medicine and Surgery (BAMS)">Bachelor of Ayurvedic Medicine and Surgery (BAMS)</option>
-            <option value="Bachelor of Homeopathic Medicine and Surgery (BHMS)">Bachelor of Homeopathic Medicine and Surgery (BHMS)</option>
+            <select name="medical_faculty_name" id="medical_faculty_name" class="hidden" disabled>
+                <option value="H.A">Health Assistant (H.A)</option>
+                <option value="Nursing">Nursing</option>
+                <option value="Medical Lab">Medical Lab</option>
+                <option value="Dental Science">Dental Science</option>
+                <option value="O.A (Ophthalmic Science)">O.A (Ophthalmic Science)</option>
+                <option value="Radiography">Radiography</option>
+                <option value="Pharmacy">Pharmacy</option>
+                <option value="General Ayurved">General Ayurved</option>
+                <option value="Physiotherapy">Physiotherapy</option>
+                <option value="Midwife">Midwife</option>
+                <option value="Yoga">Yoga</option>
+            </select>
 
-            <!-- Add more options as needed -->
-          </select>
-        </div>
-        <!-- University Engineering Faculty Options -->
-        <div id="university_engineering_faculty_fields" style="display: none;">
-          <label for="university_engineering_faculty_name">Select University Engineering Faculty:</label>
-          <select name="university_engineering_faculty_name" id="university_engineering_faculty_name">
-            <option value="Civil Engineering">Civil Engineering</option>
-            <option value="Computer Engineering">Computer Engineering</option>
-            <option value="Electrical Engineering">Electrical Engineering</option>
-            <option value="Electronics Engineering">Electronics Engineering</option>
-            <option value="Mechanical Engineering">Mechanical Engineering</option>
-            <option value="Automobile Engineering">Automobile Engineering</option>
-            <option value="Architecture">Architecture</option>
-            <option value="Geotechnical Engineering">Geotechnical Engineering</option>
-            <option value="Environmental Engineering">Environmental Engineering</option>
-            <option value="Software Engineering">Software Engineering</option>
-            <option value="Biotechnology">Biotechnology</option>
-            <option value="Information Technology">Information Technology</option>
-            <!-- Add more options as needed -->
-          </select>
-        </div>
-        <!-- University Other Faculty Options -->
-        <div id="university_other_faculty_fields" style="display: none;">
-          <label for="university_other_faculty_name">Select University Faculty (Other):</label>
-          <select name="university_other_faculty_name" id="university_other_faculty_name">
-            <option value="Bachelor of Business Administration (BBA)">Bachelor of Business Administration (BBA)</option>
-            <option value="Bachelor of Business Studies (BBS)">Bachelor of Business Studies (BBS)</option>
-            <option value="Bachelor of Law (LLB)">Bachelor of Law (LLB)</option>
-            <option value="Bachelor of Hotel Management (BHM)">Bachelor of Hotel Management (BHM)</option>
-            <option value="Bachelor of Travel and Tourism Management (BTTM)">Bachelor of Travel and Tourism Management (BTTM)</option>
-            <option value="Bachelor of Economics (B.Econ)">Bachelor of Economics (B.Econ)</option>
-            <option value="Bachelor of Public Administration (BPA)">Bachelor of Public Administration (BPA)</option>
-            <option value="Bachelor of Accounting (B.Acc)">Bachelor of Accounting (B.Acc)</option>
-            <option value="Bachelor of Finance (B.Fin)">Bachelor of Finance (B.Fin)</option>
-            <option value="Bachelor of Marketing Management (BMM)">Bachelor of Marketing Management (BMM)</option>
+            <select name="engineering_faculty_name" id="engineering_faculty_name" class="hidden" disabled>
+                <option value="Civil Engineering">Civil Engineering</option>
+                <option value="Geomatics Engineering">Geomatics Engineering</option>
+                <option value="Computer Engineering">Computer Engineering</option>
+                <option value="IT Engineering">IT Engineering</option>
+                <option value="Electrical Engineering">Electrical Engineering</option>
+                <option value="Electronic Engineering">Electronic Engineering</option>
+                <option value="Electrical & Electronic Engineering">Electrical & Electronic Engineering</option>
+                <option value="Architectural Engineering">Architectural Engineering</option>
+                <option value="Mechanical Engineering">Mechanical Engineering</option>
+                <option value="Mechatronics Engineering">Mechatronics Engineering</option>
+                <option value="Automobile Engineering">Automobile Engineering</option>
+                <option value="Refrigeration & AC Engineering">Refrigeration & AC Engineering</option>
+                <option value="Biomedical Engineering">Biomedical Engineering</option>
+                <option value="Hydropower Engineering">Hydropower Engineering</option>
+            </select>
+
+            <select name="other_faculty_name" id="other_faculty_name" class="hidden" disabled>
+                <option value="Agriculture Engineering">Agriculture Engineering</option>
+                <option value="Animal Science">Animal Science</option>
+                <option value="Hotel Management">Hotel Management</option>
+                <option value="Tourism">Tourism</option>
+                <option value="Agro Engineering">Agro Engineering</option>
+            </select>
+
+            <select name="medical_year" id="medical_year" class="hidden" disabled>
+                <option value="1">Year 1</option>
+                <option value="2">Year 2</option>
+                <option value="3">Year 3</option>
+            </select>
+
+            <select name="semester" id="semester" class="hidden" disabled>
+                <option value="1">Semester 1</option>
+                <option value="2">Semester 2</option>
+                <option value="3">Semester 3</option>
+                <option value="4">Semester 4</option>
+                <option value="5">Semester 5</option>
+                <option value="6">Semester 6</option>
+            </select>
+
+            <!-- University Fields -->
+            <select name="university_faculty_category" id="university_faculty_category" class="hidden" disabled>
+                <option value="Medical">Medical</option>
+                <option value="Engineering">Engineering</option>
+                <option value="Other">Other</option>
+            </select>
+
+            <select name="university_medical_faculty_name" id="university_medical_faculty_name" class="hidden" disabled>
+                <option value="Bachelor of Medicine, Bachelor of Surgery (MBBS)">Bachelor of Medicine, Bachelor of Surgery (MBBS)</option>
+                <option value="Bachelor of Dental Surgery (BDS)">Bachelor of Dental Surgery (BDS)</option>
+                <option value="Bachelor of Pharmacy (BPharm)">Bachelor of Pharmacy (BPharm)</option>
+                <option value="Bachelor of Nursing (BN)">Bachelor of Nursing (BN)</option>
+                <option value="Bachelor of Physiotherapy (BPT)">Bachelor of Physiotherapy (BPT)</option>
+                <option value="Bachelor of Medical Imaging (B.MI)">Bachelor of Medical Imaging (B.MI)</option>
+                <option value="Bachelor of Optometry">Bachelor of Optometry</option>
+                <option value="Bachelor of Public Health (BPH)">Bachelor of Public Health (BPH)</option>
+                <option value="Bachelor of Medical Laboratory Technology (BMLT)">Bachelor of Medical Laboratory Technology (BMLT)</option>
+                <option value="Bachelor of Ayurvedic Medicine and Surgery (BAMS)">Bachelor of Ayurvedic Medicine and Surgery (BAMS)</option>
+                <option value="Bachelor of Homeopathic Medicine and Surgery (BHMS)">Bachelor of Homeopathic Medicine and Surgery (BHMS)</option>
+            </select>
+
+            <select name="university_engineering_faculty_name" id="university_engineering_faculty_name" class="hidden" disabled>
+                <option value="Civil Engineering">Civil Engineering</option>
+                <option value="Computer Engineering">Computer Engineering</option>
+                <option value="Electrical Engineering">Electrical Engineering</option>
+                <option value="Electronics Engineering">Electronics Engineering</option>
+                <option value="Mechanical Engineering">Mechanical Engineering</option>
+                <option value="Automobile Engineering">Automobile Engineering</option>
+                <option value="Architecture">Architecture</option>
+                <option value="Geotechnical Engineering">Geotechnical Engineering</option>
+                <option value="Environmental Engineering">Environmental Engineering</option>
+                <option value="Software Engineering">Software Engineering</option>
+                <option value="Biotechnology">Biotechnology</option>
+                <option value="Information Technology">Information Technology</option>
+            </select>
+
+            <select name="university_other_faculty_name" id="university_other_faculty_name" class="hidden" disabled>
+                <option value="Bachelor of Business Administration (BBA)">Bachelor of Business Administration (BBA)</option>
+                <option value="Bachelor of Business Studies (BBS)">Bachelor of Business Studies (BBS)</option>
+                <option value="Bachelor of Law (LLB)">Bachelor of Law (LLB)</option>
+                <option value="Bachelor of Hotel Management (BHM)">Bachelor of Hotel Management (BHM)</option>
+                <option value="Bachelor of Travel and Tourism Management (BTTM)">Bachelor of Travel and Tourism Management (BTTM)</option>
+                <option value="Bachelor of Economics (B.Econ)">Bachelor of Economics (B.Econ)</option>
+                <option value="Bachelor of Public Administration (BPA)">Bachelor of Public Administration (BPA)</option>
+                <option value="Bachelor of Accounting (B.Acc)">Bachelor of Accounting (B.Acc)</option>
+                <option value="Bachelor of Finance (B.Fin)">Bachelor of Finance (B.Fin)</option>
+                <option value="Bachelor of Marketing Management (BMM)">Bachelor of Marketing Management (BMM)</option>
+            </select>
+
+            <select name="university_medical_year" id="university_medical_year" class="hidden" disabled>
+                <option value="1">Year 1</option>
+                <option value="2">Year 2</option>
+                <option value="3">Year 3</option>
+                <option value="4">Year 4</option>
+                <option value="5">Year 5</option>
+                <option value="6">Year 6</option>
+                <option value="7">Year 7</option>
+                <option value="8">Year 8</option>
+            </select>
+
+            <select name="university_semester" id="university_semester" class="hidden" disabled>
+                <option value="1">Semester 1</option>
+                <option value="2">Semester 2</option>
+                <option value="3">Semester 3</option>
+                <option value="4">Semester 4</option>
+                <option value="5">Semester 5</option>
+                <option value="6">Semester 6</option>
+                <option value="7">Semester 7</option>
+                <option value="8">Semester 8</option>
+            </select>
+
+            <!-- Content Type & File Upload -->
+            <select name="content_type" id="content_type" class="hidden" disabled>
+                <option value="Book">Book</option>
+                <option value="Solutions">Solutions</option>
+                <option value="Note">Note</option>
+                <option value="Old Question">Old Question</option>
+                <option value="Syllabus">Syllabus</option>
+            </select>
+
+            <input type="file" name="file" id="file" class="hidden" disabled>
+
+            <input type="submit" value="Upload File" class="hidden" disabled>
+        </form>
+    </div>
+
+    <script>
+        const category = document.getElementById('category');
+        const grade = document.getElementById('grade');
+        const nebFaculty = document.getElementById('neb_faculty');
+        const nebYear = document.getElementById('neb_year');
+        const facultyCategory = document.getElementById('faculty_category');
+        const medicalFacultyName = document.getElementById('medical_faculty_name');
+        const engineeringFacultyName = document.getElementById('engineering_faculty_name');
+        const otherFacultyName = document.getElementById('other_faculty_name');
+        const medicalYear = document.getElementById('medical_year');
+        const semester = document.getElementById('semester');
+        const uniFacultyCategory = document.getElementById('university_faculty_category');
+        const uniMedicalFacultyName = document.getElementById('university_medical_faculty_name');
+        const uniEngineeringFacultyName = document.getElementById('university_engineering_faculty_name');
+        const uniOtherFacultyName = document.getElementById('university_other_faculty_name');
+        const uniMedicalYear = document.getElementById('university_medical_year');
+        const uniSemester = document.getElementById('university_semester');
+        const contentType = document.getElementById('content_type');
+        const fileInput = document.getElementById('file');
+        const submitBtn = document.querySelector('input[type="submit"]');
+
+        function resetDropdowns() {
+            const elements = [grade, nebFaculty, nebYear, facultyCategory, medicalFacultyName,
+                            engineeringFacultyName, otherFacultyName, medicalYear, semester,
+                            uniFacultyCategory, uniMedicalFacultyName, uniEngineeringFacultyName,
+                            uniOtherFacultyName, uniMedicalYear, uniSemester, contentType,
+                            fileInput, submitBtn];
             
-            <!-- Add more options as needed -->
-          </select>
-        </div>
-        <!-- University Year selection for Medical Faculty -->
-        <div id="university_medical_year_fields" style="display: none;">
-          <label for="university_medical_year">Select Year:</label>
-          <select name="university_medical_year" id="university_medical_year">
-            <option value="1">Year 1</option>
-            <option value="2">Year 2</option>
-            <option value="3">Year 3</option>
-            <option value="4">Year 4</option>
-            <option value="5">Year 5</option>
-            <option value="6">Year 6</option>
-            <option value="7">Year 7</option>
-            <option value="8">Year 8</option>
-          </select>
-        </div>
-        <!-- University Semester selection for Engineering/Other Faculties -->
-        <div id="university_semester_fields" style="display: none;">
-          <label for="university_semester">Select Semester:</label>
-          <select name="university_semester" id="university_semester">
-            <option value="1">Semester 1</option>
-            <option value="2">Semester 2</option>
-            <option value="3">Semester 3</option>
-            <option value="4">Semester 4</option>
-            <option value="5">Semester 5</option>
-            <option value="6">Semester 6</option>
-            <option value="7">Semester 7</option>
-            <option value="8">Semester 8</option>
-          </select>
-          </select>
-        </div>
-      </div>
+            elements.forEach(element => {
+                element.classList.add('hidden');
+                element.disabled = true;
+                if (element.tagName === 'SELECT') {
+                    element.selectedIndex = 0;
+                }
+                // Remove associated label if it exists
+                const label = document.querySelector(`label[for="${element.id}"]`);
+                if (label && label.textContent !== 'Category:') { // Preserve the initial category label
+                    label.remove();
+                }
+            });
+        }
 
-      <!-- Content Type & File Upload -->
-      <label for="content_type">Select Content Type:</label>
-      <select name="content_type" id="content_type">
-        <option value="Book">Book</option>
-        <option value="Solutions">Solutions</option>
-        <option value="Note">Note</option>
-        <option value="Old Question">Old Question</option>
-        <option value="Syllabus">Syllabus</option>
-      </select>
+        function showElement(element, labelText) {
+            element.classList.remove('hidden');
+            element.disabled = false;
+            
+            // Remove existing label if it exists
+            const existingLabel = document.querySelector(`label[for="${element.id}"]`);
+            if (existingLabel) {
+                existingLabel.remove();
+            }
+            
+            // Create and insert new label
+            const label = document.createElement('label');
+            label.setAttribute('for', element.id);
+            label.textContent = labelText;
+            element.parentNode.insertBefore(label, element);
+        }
 
-      <label for="file">Upload File:</label>
-      <input type="file" name="file" id="file">
+        category.addEventListener('change', function() {
+            resetDropdowns();
+            switch(this.value) {
+                case 'Secondary':
+                    showElement(grade, 'Select Grade:');
+                    break;
+                case 'NEB':
+                    showElement(nebFaculty, 'Select NEB Faculty:');
+                    showElement(nebYear, 'Select NEB Year:');
+                    break;
+                case 'CTEVT':
+                    showElement(facultyCategory, 'Select Faculty Category:');
+                    break;
+                case 'University':
+                    showElement(uniFacultyCategory, 'Select University Faculty Category:');
+                    break;
+            }
+            showContentOptions();
+        });
 
-      <input type="submit" value="Upload File">
-    </form>
-  </div>
+        facultyCategory.addEventListener('change', function() {
+            // Hide all CTEVT sub-options first
+            const ctevtElements = [medicalFacultyName, engineeringFacultyName, otherFacultyName, 
+                                 medicalYear, semester];
+            ctevtElements.forEach(element => {
+                element.classList.add('hidden');
+                element.disabled = true;
+                const label = document.querySelector(`label[for="${element.id}"]`);
+                if (label) label.remove();
+            });
+
+            switch(this.value) {
+                case 'Medical':
+                    showElement(medicalFacultyName, 'Select Medical Faculty:');
+                    showElement(medicalYear, 'Select Year:');
+                    break;
+                case 'Engineering':
+                    showElement(engineeringFacultyName, 'Select Engineering Faculty:');
+                    showElement(semester, 'Select Semester:');
+                    break;
+                case 'Other':
+                    showElement(otherFacultyName, 'Select Other Faculty:');
+                    showElement(semester, 'Select Semester:');
+                    break;
+            }
+            showContentOptions();
+        });
+
+        uniFacultyCategory.addEventListener('change', function() {
+            // Hide all University sub-options first
+            const uniElements = [uniMedicalFacultyName, uniEngineeringFacultyName, 
+                               uniOtherFacultyName, uniMedicalYear, uniSemester];
+            uniElements.forEach(element => {
+                element.classList.add('hidden');
+                element.disabled = true;
+                const label = document.querySelector(`label[for="${element.id}"]`);
+                if (label) label.remove();
+            });
+
+            switch(this.value) {
+                case 'Medical':
+                    showElement(uniMedicalFacultyName, 'Select University Medical Faculty:');
+                    showElement(uniMedicalYear, 'Select Year:');
+                    break;
+                case 'Engineering':
+                    showElement(uniEngineeringFacultyName, 'Select University Engineering Faculty:');
+                    showElement(uniSemester, 'Select Semester:');
+                    break;
+                case 'Other':
+                    showElement(uniOtherFacultyName, 'Select University Faculty (Other):');
+                    showElement(uniSemester, 'Select Semester:');
+                    break;
+            }
+            showContentOptions();
+        });
+
+        function showContentOptions() {
+            const lastLevelSelected = 
+                grade.value ||
+                (nebFaculty.value && nebYear.value) ||
+                medicalYear.value ||
+                semester.value ||
+                uniMedicalYear.value ||
+                uniSemester.value;
+
+            if (lastLevelSelected) {
+                showElement(contentType, 'Select Content Type:');
+                showElement(fileInput, 'Upload File:');
+                showElement(submitBtn, '');
+            }
+        }
+
+        [grade, nebFaculty, nebYear, medicalFacultyName, engineeringFacultyName,
+         otherFacultyName, medicalYear, semester, uniMedicalFacultyName,
+         uniEngineeringFacultyName, uniOtherFacultyName, uniMedicalYear,
+         uniSemester].forEach(select => {
+            select.addEventListener('change', showContentOptions);
+        });
+
+        document.getElementById('myForm').addEventListener('submit', function(e) {
+            // e.preventDefault(); // Uncomment for testing
+            const formData = new FormData(this);
+            console.log('Form data to be sent:');
+            for (let [key, value] of formData.entries()) {
+                console.log(`${key}: ${value}`);
+            }
+        });
+    </script>
 </body>
 </html>
