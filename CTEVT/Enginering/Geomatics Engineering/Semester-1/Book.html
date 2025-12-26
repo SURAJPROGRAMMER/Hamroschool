@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Hamro School</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="main">
+        <div class="navbar">
+            <div class="icon">
+                <h2 class="logo">HaMo ScHooL</h2>
+            </div>
+
+            <div class="menu">
+                <ul>
+                    <li><a href="../HOME/home.html">HOME</a></li>
+                    <li><a href="../../ABOUT/ABOUT.html">ABOUT</a></li>
+                    <li>
+                        <a href="#">SERVICE</a>
+                         <ul class="dropdown">
+                <li><a href="#">Seondary</a></li>
+                <li><a href="#">NEB</a></li>
+                <li><a href="CTEVT.html">CTEVT</a></li>
+                <li><a href="#">Becholore</a></li>
+            </ul>
+                    </li>
+                    <li><a href="../../DESING/DESING.html">DESIGN</a></li>
+                    <li><a href="../../CONTACT/CONTACT.html">CONTACT</a></li>
+                </ul>
+            </div>
+            <div class="search">
+                <input class="srch" type="search" name="" placeholder="Type To text">
+                <a href="#"> <button class="btn">Search</button></a>
+            </div>
+
+        </div> 
+        <!----------show and  Downloads file  --------->
+        <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Download UI</title>
+    <style>
+        /* General body styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+
+        /* Navbar styling */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #333;
+            padding: 50px;
+        }
+
+        .navbar .logo {
+            color: white;
+            font-size: 30px;
+        }
+
+        .menu ul {
+            list-style-type: none;
+            margin: 10;
+            padding: 50;
+        }
+
+        .menu ul li {
+            display: inline-block;
+            margin-right: 20px;
+        }
+
+        .menu ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 5px 10px;
+            display: block;
+        }
+
+        .menu ul li a:hover {
+            background-color: #575757;
+        }
+
+        /* Dropdown menu styling */
+        .dropdown {
+            display: none;
+            position: absolute;
+            background-color: #333;
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .menu ul li:hover .dropdown {
+            display: block;
+        }
+
+        .dropdown li {
+            padding: 10px;
+        }
+
+        .search {
+            display: flex;
+            align-items: center;
+        }
+
+        .search input {
+            padding: 5px;
+            margin-right: 10px;
+        }
+
+        .search button {
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* Table styling */
+        .table-container {
+            width: 60%;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin: 20px auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .download-btn {
+            background-color: #28a745;
+            color: white;
+            padding: 8px 12px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .download-btn:hover {
+            background-color: #218838;
+        }
+
+        /* Footer styling */
+        .footer-distributed {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .footer-left, .footer-center, .footer-right {
+            flex: 1;
+        }
+
+        .footer-left p, .footer-center p {
+            font-size: 14px;
+            margin: 5px 0;
+        }
+
+        .footer-right p {
+            font-size: 14px;
+        }
+
+        .footer-icons a {
+            color: white;
+            margin-right: 10px;
+        }
+
+        .footer-icons a:hover {
+            color: #007bff;
+        }
+
+    </style>
+</head>
+<body>
+<div class="table-container">
+    <table>
+        <tr>
+            <th>Category</th>
+            <th>Subject Name</th>
+            <th>Download</th>
+            <th>View</th>
+        </tr>
+        <tr>
+            <td>Notes</td>
+            <td>Mathematics</td>
+            <td><a href="##" class="download-btn" download>Download</a></td>
+            <td><button class="download-btn" onclick="previewFile('files/math.pdf')">View</button></td>
+        </tr>
+        <tr>
+            <td>Notes</td>
+            <td>Science</td>
+            <td><a href="##" class="download-btn" download>Download</a></td>
+            <td><button class="download-btn" onclick="previewFile('files/science.jpg')">View</button></td>
+        </tr>
+        <tr>
+            <td>Notes</td>
+            <td>English</td>
+            <td><a href="files/english.txt" class="download-btn" download>Download</a></td>
+            <td><button class="download-btn" onclick="previewFile('files/english.txt')">View</button></td>
+        </tr>
+    </table>
+</div>
+
+<!-- Preview Modal -->
+<div id="previewModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; 
+    background:rgba(0,0,0,0.8); z-index:1000; padding:40px; box-sizing:border-box;">
+    <button onclick="closePreview()" style="float:right; font-size:20px; padding:5px 15px;">X</button>
+    <div id="previewContent" style="margin-top:20px; max-height:80%; overflow:auto; background:white; padding:20px; border-radius:10px;"></div>
+</div>
+<script>
+function previewFile(fileUrl) {
+    const ext = fileUrl.split('.').pop().toLowerCase();
+    const container = document.getElementById('previewContent');
+    container.innerHTML = '';
+
+    if (['jpg', 'jpeg', 'png', 'gif'].includes(ext)) {
+        container.innerHTML = `<img src="${fileUrl}" style="max-width:100%;" />`;
+    } else if (ext === 'pdf') {
+        container.innerHTML = `<iframe src="${fileUrl}" style="width:100%; height:500px;"></iframe>`;
+    } else if (ext === 'txt') {
+        fetch(fileUrl)
+          .then(res => res.text())
+          .then(data => container.innerHTML = `<pre>${data}</pre>`)
+          .catch(err => container.innerHTML = `<p>Error loading text file</p>`);
+    } else {
+        container.innerHTML = `<p>Preview not supported for .${ext} files. <a href="${fileUrl}" download>Download instead</a></p>`;
+    }
+
+    document.getElementById('previewModal').style.display = 'block';
+}
+
+function closePreview() {
+    document.getElementById('previewModal').style.display = 'none';
+}
+</script>
+
+</body>
+</html>
+<!---------- Popular Courses HTML Ends --------->
+
+
+
+<footer class="footer-distributed">
+
+    <div class="footer-left">
+        <h3>
+
+   Hamro  <span>School</span></h3>
+        <p class="footer-links">
+            <a href="../HOME/home.html">Home</a>
+            |
+            <a href="../../ABOUT/ABOUT.html">About</a>
+            |
+            <a href="#">service</a>
+            |
+            <a href="../../DESING/DESING.html">Design
+            |
+             <a href="../../CONTACT/CONTACT.html">Contact</a>
+            |
+            <a href="#"></a>
+        </p>
+
+        <p class="footer-company-name">Copyright © 2024<strong>uniquDeveloper </span> all right recived </p>
+    </div>
+
+    <div class="footer-center">
+        <div>
+            <i class="fa fa-map-marker"></i>
+            <p><span>kathamandu</span>
+            Nepal</p>
+        </div>
+
+        <div>
+            <i class="fa fa-phone"></i>
+            <p>+9779807728498</p>
+        </div>
+        <div>
+            <i class="fa fa-envelope"></i>
+            <p><a href="mailto:sagar00001.co@gmail.com">hamroschool.np@gmail.com</a>
+        </div>
+    </div>
+    <div class="footer-right">
+        <p class="footer-company-about">
+            <span>About the company</span>
+           <strong>HaMro ScHool</strong> "Our school’s website is  a solution provider. We do can offer answers to exam questions or materials intended to give direct solutions. Our goal is to provide students with educational resources, information, and inspiration to help them enhance their learning experience. We aim to simplify the learning process and contribute to the overall development of students."
+        </p>
+        <div class="footer-icons">
+            <a href="#"><i class="fa fa-facebook"></i></a>
+            <a href="#"><i class="fa fa-instagram"></i></a>
+            <a href="#"><i class="fa fa-linkedin"></i></a>
+            <a href="#"><i class="fa fa-twitter"></i></a>
+            <a href="#"><i class="fa fa-youtube"></i></a>
+        </div>
+    </div>
+</footer>
+
+
+</body>
+</html>

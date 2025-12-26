@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Registration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .register-container {
+            width: 400px;
+            margin: 50px auto;
+            padding: 25px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+        .register-container h2 {
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="register-container">
+        <h2>Register</h2>
+        <form action="register.php" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="fullname">Full Name</label>
+                <input type="text" name="fullname" id="fullname" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" name="email" id="email" required>
+            </div>
+            <div class="form-group">
+                <label for="education">Level of Education</label>
+                <input type="text" name="education" id="education" required>
+            </div>
+            <div class="form-group">
+                <label for="school">School Name</label>
+                <input type="text" name="school" id="school" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="text" name="phone" id="phone" required>
+            </div>
+            <div class="form-group">
+                <label for="address">Address</label>
+                <textarea name="address" id="address" rows="3" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="profile_pic">Profile Picture</label>
+                <input type="file" name="profile_pic" id="profile_pic" accept="image/*">
+            </div>
+            <div class="form-group">
+                <label for="password">Create Password</label>
+                <input type="password" name="password" id="password" required>
+            </div>
+            <button type="submit">Register</button>
+        </form>
+    </div>
+</body>
+</html>

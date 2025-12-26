@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Multi File Viewer with PDF Preview</title>
+  <style>
+    #preview > div {
+      margin-bottom: 20px;
+      padding: 10px;
+      border: 1px solid #ccc;
+    }
+    canvas {
+      max-width: 100%;
+      display: block;
+      margin-top: 10px;
+    }
+    img {
+      max-width: 100%;
+      display: block;
+    }
+    pre {
+      background: #f9f9f9;
+      padding: 10px;
+      overflow-x: auto;
+    }
+  </style>
+</head>
+<body>
+  <h2>Select Files to Preview</h2>
+  <input type="file" id="fileInput" multiple>
+  <div id="preview"></div>
+
+  <!-- PDF.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
+
+  <script>
+    const fileInput = document.getElementById('fileInput');
+    const preview = document.getElementById('preview');
+
+    fileInput.addEventListener('change', function () {
+      preview.innerHTML = '';
+      const files = this.files;
+
+      Array.from(files).forEach(file => {
+        const container = document.createElement('div');
+        const reader = new FileReader();
+
+        if (file.type.startsWith('image/')) {
+          reader.onload = e => {
+            const img = document.createElement('img');
+            img.src = e.target.result;
+            container.appendChild(img);
+          };
+          reader.readAsDataURL(file);
+
+        } else if (file.type === 'application/pdf') {
+          reader.onload = async e => {
+            const pdfData = new Uint8Array(e.target.result);
+            const pdf = await pdfjsLib.getDocument({ data: pdfData }).promise;
+            const page = await pdf.getPage(1); // First page only
+            const canvas = document.createElement('canvas');
+            const context = canvas.getContext('2d');
+            const viewport = page.getViewport({ scale: 1.5 });
+            canvas.height = viewport.height;
+            canvas.width = viewport.width;
+            await page.render({ canvasContext: context, viewport: viewport }).promise;
+            container.appendChild(canvas);
+          };
+          reader.readAsArrayBuffer(file);
+
+        } else if (file.type.startsWith('text/')) {
+          reader.onload = e => {
+            const pre = document.createElement('pre');
+            pre.textContent = e.target.result;
+            container.appendChild(pre);
+          };
+          reader.readAsText(file);
+
+        } else {
+          const info = document.createElement('p');
+          info.textContent = `File: ${file.name} (${file.type}, ${file.size} bytes)`;
+          container.appendChild(info);
+        }
+
+        preview.appendChild(container);
+      });
+    });
+  </script>
+</body>
+</html>

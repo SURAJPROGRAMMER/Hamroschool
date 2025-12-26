@@ -686,7 +686,7 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
-    margin-top: 150PX;
+    margin-top: -10PX;
 }
 
 /* Header Styles */
@@ -841,3 +841,4 @@ body {
         align-items: center;
     }
 }
+

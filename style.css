@@ -380,6 +380,7 @@ body, html {
         margin: 10px 0;
         justify-content: center;
     }
+    
 }
 /*********************************Top-nevigation section Section END ****************************/
 /*********************************Footer section Start ****************************/
@@ -445,7 +446,7 @@ margin-right: 500px;
 
 .footer-distributed .footer-center i {
     margin-top: 30px;
-    background-color: #33383b;
+    background-color: #3c474e;
     color: #ffffff;
     font-size: 25px;
     width: 38px;
@@ -515,7 +516,7 @@ margin-right: 500px;
     width: 35px;
     height: 35px;
     cursor: pointer;
-    background-color: #33383b;
+    background-color: #39586b;
     border-radius: 2px;
     font-size: 20px;
     color: #ffffff;
@@ -551,7 +552,7 @@ margin-right: 500px;
     position: relative;
 }
 .conotent .par{
-    margin-top: 20px;
+    margin-top: 5px;
     color: white;
     padding-left: 20px;
     padding-bottom: 25px;

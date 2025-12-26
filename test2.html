@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>View Uploaded Files</title>
+  <style>
+    img, iframe, pre { max-width: 100%; margin-top: 10px; }
+    .file-block { margin-bottom: 20px; border: 1px solid #ccc; padding: 10px; }
+  </style>
+</head>
+<body>
+  <h2>Uploaded Files</h2>
+  <div id="fileList"></div>
+
+  <script>
+    fetch('list_files.php')
+      .then(response => response.json())
+      .then(files => {
+        const container = document.getElementById('fileList');
+        files.forEach(file => {
+          const ext = file.split('.').pop().toLowerCase();
+          const path = `uploads/${file}`;
+          const div = document.createElement('div');
+          div.className = 'file-block';
+
+          if (['png', 'jpg', 'jpeg', 'gif'].includes(ext)) {
+            const img = document.createElement('img');
+            img.src = path;
+            div.innerHTML = `<strong>${file}</strong>`;
+            div.appendChild(img);
+          } else if (ext === 'pdf') {
+            const iframe = document.createElement('iframe');
+            iframe.src = path;
+            iframe.height = 400;
+            div.innerHTML = `<strong>${file}</strong>`;
+            div.appendChild(iframe);
+          } else if (['txt', 'csv'].includes(ext)) {
+            fetch(path)
+              .then(res => res.text())
+              .then(text => {
+                const pre = document.createElement('pre');
+                pre.textContent = text;
+                div.innerHTML = `<strong>${file}</strong>`;
+                div.appendChild(pre);
+              });
+          } else {
+            const a = document.createElement('a');
+            a.href = path;
+            a.download = file;
+            a.textContent = `Download ${file}`;
+            div.appendChild(a);
+          }
+
+          container.appendChild(div);
+        });
+      });
+  </script>
+</body>
+</html>

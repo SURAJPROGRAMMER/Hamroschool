@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Upload File</title>
+</head>
+<body>
+  <h2>Upload File</h2>
+  <form action="upload.php" method="POST" enctype="multipart/form-data">
+    <label>Category:</label>
+    <input type="text" name="category" required><br><br>
+
+    <label>Grade:</label>
+    <input type="text" name="grade"><br><br>
+
+    <label>Faculty Category:</label>
+    <input type="text" name="faculty_category"><br><br>
+
+    <label>Faculty Name:</label>
+    <input type="text" name="faculty_name"><br><br>
+
+    <label>Year/Semester:</label>
+    <input type="text" name="year_sem"><br><br>
+
+    <label>Content Type:</label>
+    <input type="text" name="content_type"><br><br>
+
+    <label>Subject Name:</label>
+    <input type="text" name="subject_name"><br><br>
+
+    <label>Select File:</label>
+    <input type="file" name="file" required><br><br>
+
+    <button type="submit">Upload</button>
+  </form>
+</body>
+</html>
